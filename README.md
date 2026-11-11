@@ -1,17 +1,36 @@
-# QOC_webpage
+# Quality One Care – React
 
-A static HTML/CSS/JS rebuild of the [Quality One Care Home Health](https://qualityonecare.com/) website.
+The Quality One Care website rebuilt as a React app (Vite + React Router).
 
-Open `index.html` in a browser to view it. No build step required.
+## Run it
 
-## Structure
-- `index.html` – home page (hero slider, services carousel)
-- `about-us.html`, `services.html`, `careers.html`, `application-forms.html`, `drug-calculation-test.html`, `blog.html`, `contact-us.html`
-- One page per service: `adult-care.html`, `home-infusion.html`, `hospice.html`, `pediatric-care.html`, `physical-therapy.html`, `occupational-therapy.html`, `speech-therapy.html`, `skilled-nursing-visits.html`
-- `styles.css` – all styles
-- `script.js` – slider, carousel, mobile menu, search toggle, scroll animations, contact form validation
-- `assets/` – images and icons
+```bash
+npm install
+npm run dev      # local dev server with hot reload
+npm run build    # production build into dist/
+npm run preview  # serve the production build locally
+```
 
-## Notes
-- The contact form validates input but is not connected to a backend yet.
-- Patient portal, Resources links, downloads and blog articles point to the live site / external services.
+## Where things live
+
+| Path | What it is |
+|---|---|
+| `src/App.jsx` | All routes (URLs → page components) |
+| `src/components/Layout.jsx` | Header + nav + footer wrapped around every page |
+| `src/components/` | Reusable pieces: `Header`, `Nav`, `Footer`, `PageTitle`, `HeroSlider`, `ServiceCarousel`, `Sidebar`, `CheckList`, `ContactList`, `Reveal` (scroll fade-in), `Icon` |
+| `src/pages/` | One component per page |
+| `src/data/services.js` | Text for the 8 service pages; `/services/:slug` renders from this |
+| `src/data/site.js` | Contact details, external links, downloads, blog posts |
+| `src/index.css` | All styles (same as the static site) |
+| `public/assets/` | Images and icons |
+
+## URLs
+
+`/`, `/about-us`, `/services`, `/services/<service>`, `/careers`,
+`/careers/application-forms`, `/careers/drug-calculation-test`, `/blog`, `/contact-us`
+
+## Hosting note
+
+This app uses normal URLs (e.g. `/about-us`). The host must send every URL
+to `index.html` so refreshing a page works. Netlify, Vercel and Render handle
+this with a one-line rewrite rule. GitHub Pages doesn't support it directly.
